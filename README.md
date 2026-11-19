@@ -1,36 +1,24 @@
-# CFS Order Intelligence Dashboard
+# CFS Operations Intelligence
+React + Vite management dashboard ready for GitHub -> Vercel deployment.
 
-Responsive React + Vite dashboard for Project and Service Delivery Managers. It loads the included baseline Excel workbooks in the browser, accepts daily Rework Handover uploads, merges records, stores the current view in IndexedDB, and refreshes KPIs immediately.
+## Features
+- Professional dark CFS operations command-center layout.
+- Dedicated Operations Overview, Rework Operations, Order Aging & Fulfilment, DOA Management, Actions & Commitments tabs.
+- Daily Rework Handover upload: the latest successful rework upload replaces only the Rework dataset; other workbooks stay intact.
+- Previous Rework snapshot retained in IndexedDB before replacement.
+- All workbook data persists in this browser using IndexedDB until replaced.
+- Charts, management KPIs, global table search, and minimizable AI assistant.
 
-## Run locally
+## Deploy update
+Extract this package over your existing local repository, then run:
 
-```bash
-npm install
-npm run dev
+```powershell
+git add .
+git commit -m "Upgrade CFS Operations Intelligence dashboard"
+git push origin main
 ```
 
-## Deploy with GitHub and Vercel
+Vercel should redeploy automatically from GitHub.
 
-1. Create a GitHub repository and push this folder.
-2. In Vercel, select **Add New > Project** and import the repository.
-3. Vercel detects Vite automatically. Use build command `npm run build` and output directory `dist`.
-4. Deploy. No server or environment variable is required.
-
-## Data behavior
-
-- Baseline files are under `public/baseline`.
-- Daily `.xlsx` files are parsed locally in the browser. Workbook data does not leave the device.
-- Uploaded rows are normalized to a common model, then merged by source + SO/DDL/serial fallback key.
-- Browser state is stored in IndexedDB, which is safer for larger datasets than localStorage.
-- Use **Reset local data** to restore the bundled baseline.
-
-## AI Order Assistant
-
-The assistant is an offline natural-language query layer over the records in memory. It supports order, DDL, serial, customer, status, aging, region and summary questions. No workbook content is sent to an external AI service.
-
-Examples:
-- `Show order G001081500`
-- `How many pending repair items?`
-- `Summarise EPA rework`
-- `Show items older than 30 days`
-- `Top customers`
+## Important production note
+IndexedDB is device/browser-local. For a multi-user Lenovo deployment, move the shared dataset to a Lenovo-approved authenticated data store so all PM/SDM users see the same current snapshot.
